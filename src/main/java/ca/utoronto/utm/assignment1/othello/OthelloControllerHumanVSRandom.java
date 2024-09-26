@@ -7,7 +7,7 @@ package ca.utoronto.utm.assignment1.othello;
  * @author arnold
  *
  */
-public class OthelloControllerHumanVSRandom {
+public class  OthelloControllerHumanVSRandom {
 	
 	/**
 	 * Run main to play a Human (P1) against the computer P2. 
