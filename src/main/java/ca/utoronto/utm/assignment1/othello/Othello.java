@@ -11,15 +11,16 @@ import java.util.Random;
  * over.
  * <p>
  * See the following for a short, simple introduction.
+ * 
  * https://www.youtube.com/watch?v=Ol3Id7xYsY4
  *
  * @author arnold
  */
 public class Othello {
     public static final int DIMENSION = 8; // This is an 8x8 game
+    private OthelloBoard board = new OthelloBoard(DIMENSION);
     private char whosTurn = OthelloBoard.P1; // P1 moves first!
     private int numMoves = 0;
-    private OthelloBoard board = new OthelloBoard(DIMENSION);
 
 
     /**
@@ -42,11 +43,29 @@ public class Othello {
      */
     public boolean move(int row, int col) {
         boolean x = this.board.move(row, col, this.whosTurn);
-        if (x) {
+        if (x || !canMove(this.whosTurn)) {
             this.numMoves++;
             this.whosTurn = (this.whosTurn == OthelloBoard.P1) ? OthelloBoard.P2 : OthelloBoard.P1;
         }
         return x;
+    }
+
+    /**
+     * @return whether player can move
+     * @param player P1 or P2
+     */
+    public boolean canMove(char player) {
+        return this.board.hasMove() == player || this.board.hasMove() == OthelloBoard.BOTH;
+    }
+
+    /**
+     * @return how many pieces would be flipped if player makes a move at row, col
+     * @param player P1 or P2
+     * @param row
+     * @param col
+     */
+    public int numFlips(char player, int row, int col) {
+        return this.board.numFlips(player, row, col);
     }
 
     /**

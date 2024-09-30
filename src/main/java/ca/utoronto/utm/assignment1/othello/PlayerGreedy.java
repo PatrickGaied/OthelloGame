@@ -21,8 +21,34 @@ package ca.utoronto.utm.assignment1.othello;
  *
  */
 
-public class PlayerGreedy {
+public class PlayerGreedy extends Player {
+	public PlayerGreedy(Othello othello, char player) {
+		super(othello, player);
+	}
+
+	@Override
 	public Move getMove() {
-		return null;
+		if (!this.othello.canMove(this.player)) {
+			return new Move(0, 0);
+		}
+
+		int maxTokens = 0;
+		Move bestMove = new Move(0, 0);
+		for (int row = 0; row < Othello.DIMENSION; row++) {
+			for (int col = 0; col < Othello.DIMENSION; col++) {
+				if (this.othello.numFlips(this.player, row, col) > maxTokens) {
+					maxTokens = this.othello.numFlips(this.player, row, col);
+					bestMove = new Move(row, col);
+				} else if (this.othello.numFlips(this.player, row, col) == maxTokens) {
+					if (row < bestMove.getRow()) {
+						bestMove = new Move(row, col);
+					} else if (row == bestMove.getRow() && col < bestMove.getCol()) {
+						bestMove = new Move(row, col);
+					}
+				}
+			}
+
+		}
+		return bestMove;
 	}
 }

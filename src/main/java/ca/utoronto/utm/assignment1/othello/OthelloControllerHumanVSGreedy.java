@@ -7,10 +7,16 @@ package ca.utoronto.utm.assignment1.othello;
  * @author arnold
  *
  */
-public class OthelloControllerHumanVSGreedy {
-	
+public class OthelloControllerHumanVSGreedy extends OthelloController {
+
+	public OthelloControllerHumanVSGreedy() {
+		super();
+		this.player1 = new PlayerHuman(this.othello, OthelloBoard.P1);
+		this.player2 = new PlayerGreedy(this.othello, OthelloBoard.P2);
+	}
+
 	/**
-	 * Run main to play a Human (P1) against the computer P2. 
+	 * Run main to play a Human (P1) against the computer P2.
 	 * The computer uses a greedy strategy, that is, it picks the first
 	 * move which maximizes its number of token on the board.
 	 * The output should be almost identical to that of OthelloControllerHumanVSHuman.
@@ -18,6 +24,6 @@ public class OthelloControllerHumanVSGreedy {
 	 */
 	public static void main(String[] args) {
 		OthelloControllerHumanVSGreedy oc = new OthelloControllerHumanVSGreedy();
-		// oc.play(); // this should work
+		 oc.play(); // this should work
 	}
 }

@@ -211,6 +211,9 @@ public class OthelloBoard {
         if (get(row, col) != EMPTY) {
             return false;
         }
+        if (hasMove() != player && hasMove() != BOTH) { // can't move so move on
+            return false;
+        }
         int[] directions = {-1, 0, 1};
         boolean valid = false;
 
@@ -234,6 +237,37 @@ public class OthelloBoard {
         }
         return false;
 
+    }
+
+    /**
+     * @param player P1 or P2
+     * @param row    starting row, in {0,...,dim-1} (typically {0,...,7})
+     * @param col    starting col, in {0,...,dim-1} (typically {0,...,7})
+     * @return the number of tokens that would be flipped if player makes a move at
+     * (row,col) no changes are made to the board
+     */
+    public int numFlips(char player, int row, int col) {
+        int count = 0;
+        int[] directions = {-1, 0, 1};
+
+        for (int di : directions) {
+            for (int dj : directions) {
+                if (di == 0 && dj == 0) {
+                    continue;
+                }
+                char P = hasMove(row, col, di, dj);
+                if (P == player) {
+                    row += di;
+                    col += dj;
+                    while (validCoordinate(row, col) && get(row, col) != player) {
+                        row += di;
+                        col += dj;
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     /**

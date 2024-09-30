@@ -14,7 +14,12 @@ package ca.utoronto.utm.assignment1.othello;
  * @author arnold
  *
  */
-public class OthelloControllerRandomVSRandom {
+public class OthelloControllerRandomVSRandom extends OthelloController {
+	public OthelloControllerRandomVSRandom() {
+		super();
+		this.player1 = new PlayerRandom(this.othello, OthelloBoard.P1);
+		this.player2 = new PlayerRandom(this.othello, OthelloBoard.P2);
+	}
 	/**
 	 * Run main to execute the simulation and print out the two line results.
 	 * Output looks like 
@@ -25,6 +30,16 @@ public class OthelloControllerRandomVSRandom {
 	public static void main(String[] args) {
 		
 		int p1wins = 0, p2wins = 0, numGames = 10000;
+		for (int i = 1; i <= numGames; i++) {
+			OthelloControllerRandomVSRandom oc = new OthelloControllerRandomVSRandom();
+			oc.play();
+			if (oc.getWinner() == OthelloBoard.P1) {
+				p1wins++;
+			} else if (oc.getWinner() == OthelloBoard.P2) {
+				p2wins++;
+			}
+			System.out.println("Game " + i + " over");
+		}
 
 		System.out.println("Probability P1 wins=" + (float) p1wins / numGames);
 		System.out.println("Probability P2 wins=" + (float) p2wins / numGames);
