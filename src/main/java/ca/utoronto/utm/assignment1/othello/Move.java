@@ -4,9 +4,12 @@ package ca.utoronto.utm.assignment1.othello;
  * @author arnold
  *
  */
-// TODO: Javadoc this class
+// this is a Move object that stores the row and column of a move
+// it is used in the OthelloController class
+
 public class Move {
 	private int row, col;
+
 
 	public Move(int row, int col) {
 		this.row = row;
