@@ -22,6 +22,7 @@ public class PlayerHuman extends Player {
 	public PlayerHuman(Othello othello, char player) {
 
 		super(othello, player);
+		this.isHuman = true;
 	}
 
 	@Override

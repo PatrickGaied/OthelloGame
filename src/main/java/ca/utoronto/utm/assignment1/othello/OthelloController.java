@@ -10,9 +10,10 @@ public class OthelloController {
     }
 
     public void play() {
-
+        boolean report = player1.isHuman() || player2.isHuman();
         while (!othello.isGameOver() && (player1.canMove() || player2.canMove())) {
-            this.report();
+            if (report) {
+                this.report();}
 
             Move move = new Move(0, 0);
             char whosTurn = othello.getWhosTurn();
@@ -21,11 +22,12 @@ public class OthelloController {
                 move = player1.getMove();
             if (whosTurn == OthelloBoard.P2)
                 move = player2.getMove();
-
-            this.reportMove(whosTurn, move);
+            if (report) {
+                this.reportMove(whosTurn, move);}
             othello.move(move.getRow(), move.getCol());
         }
-        this.reportFinal();
+        if (report) {
+        this.reportFinal();}
     }
 
     private void reportMove(char whosTurn, Move move) {

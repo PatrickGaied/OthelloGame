@@ -43,7 +43,7 @@ public class Othello {
      */
     public boolean move(int row, int col) {
         boolean x = this.board.move(row, col, this.whosTurn);
-        if (x || !canMove(this.whosTurn)) {
+        if (x || ! canMove(this.whosTurn)) {
             this.numMoves++;
             this.whosTurn = (this.whosTurn == OthelloBoard.P1) ? OthelloBoard.P2 : OthelloBoard.P1;
         }

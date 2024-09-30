@@ -23,7 +23,7 @@ public class OthelloControllerRandomVSGreedy extends OthelloController {
 	 */
 	public static void main(String[] args) {
 		
-		int p1wins = 0, p2wins = 0, numGames = 10000;
+		int p1wins = 0, p2wins = 0, numGames = 100000;
 
 		for (int i = 1; i <= numGames; i++) {
 			OthelloControllerRandomVSGreedy oc = new OthelloControllerRandomVSGreedy();
@@ -33,7 +33,9 @@ public class OthelloControllerRandomVSGreedy extends OthelloController {
 			} else if (oc.getWinner() == OthelloBoard.P2) {
 				p2wins++;
 			}
-			System.out.println("Game " + i + " over");
+			if (i % 1000 == 0) {
+				System.out.println("Game " + i + " over");
+			}
 		}
 
 		System.out.println("Probability P1 wins=" + (float) p1wins / numGames);
